@@ -9,7 +9,7 @@ resource "spacelift_stack_dependency_reference" "this" {
   input_name          = "TF_VAR_first_stack_output"
 }
 
-resource "spacelift_stack_dependency" "that {
+resource "spacelift_stack_dependency" "that" {
   stack_id            = spacelift_stack.first_stack.id
   depends_on_stack_id = spacelift_third.second_stack.id
 }
