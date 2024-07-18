@@ -25,19 +25,45 @@ resource "spacelift_stack" "first_stack" {
   branch     = "main"
   name       = "first stack"
   repository = "first_stack"
+  autodeploy = true
 }
 
+resource "spacelift_run" "first" {
+  stack_id = spacelift_stack.first_stack.id
+
+  keepers = {
+    branch = spacelift_stack.this.branch
+  }
+}
 
 resource "spacelift_stack" "second_stack" {
   branch     = "main"
   name       = "second stack"
   repository = "second_stack"
+  autodeploy = true
+}
+
+resource "spacelift_run" "second" {
+  stack_id = spacelift_stack.second_stack.id
+
+  keepers = {
+    branch = spacelift_stack.this.branch
+  }
 }
 
 resource "spacelift_stack" "third_stack" {
   branch     = "main"
   name       = "third stack"
   repository = "third_stack"
+  autodeploy = true
+}
+
+resource "spacelift_run" "third" {
+  stack_id = spacelift_stack.third_stack.id
+
+  keepers = {
+    branch = spacelift_stack.this.branch
+  }
 }
 
 terraform {
@@ -46,14 +72,8 @@ terraform {
       source  = "spacelift.io/spacelift-io/spacelift"
       version = "1.13.0"
     }
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 3.0.0"
-    }
   }
 }
 
 provider "spacelift" {}
 
-provider "aws" {
-}
