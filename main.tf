@@ -1,3 +1,26 @@
+resource "spacelift_stack_dependency" "this" {
+  stack_id            = spacelift_stack.first_stack.id
+  depends_on_stack_id = spacelift_stack.second_stack.id
+}
+
+resource "spacelift_stack_dependency_reference" "this" {
+  stack_dependency_id = spacelift_stack_dependency.this.id
+  output_name         = "first_stack_output"
+  input_name          = "TF_VAR_first_stack_output"
+}
+
+resource "spacelift_stack_dependency" "that {
+  stack_id            = spacelift_stack.first_stack.id
+  depends_on_stack_id = spacelift_third.second_stack.id
+}
+
+resource "spacelift_stack_dependency_reference" "that" {
+  stack_dependency_id = spacelift_stack_dependency.that.id
+  output_name         = "second_stack_output"
+  input_name          = "TF_VAR_second_stack_output"
+}
+
+
 resource "spacelift_stack" "first_stack" {
   branch     = "main"
   name       = "first stack"
@@ -15,29 +38,6 @@ resource "spacelift_stack" "third_stack" {
   branch     = "main"
   name       = "third stack"
   repository = "third_stack"
-}
-
-
-resource "spacelift_stack_dependency" "test" {
-  stack_id            = spacelift_stack.second_stack.id
-  depends_on_stack_id = spacelift_stack.first_stack.id
-}
-
-resource "spacelift_stack_dependency_reference" "test" {
-  stack_dependency_id = spacelift_stack_dependency.test2.id
-  output_name         = "first_stack_output"
-  input_name          = "TF_VAR_second_stack_output"
-}
-
-resource "spacelift_stack_dependency" "test2" {
-  stack_id            = spacelift_stack.third_stack.id
-  depends_on_stack_id = spacelift_stack.second_stack.id
-}
-
-resource "spacelift_stack_dependency_reference" "test2" {
-  stack_dependency_id = spacelift_stack_dependency.test.id
-  output_name         = "second_stack_output"
-  input_name          = "TF_VAR_first_stack_output"
 }
 
 terraform {
