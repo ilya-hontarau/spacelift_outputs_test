@@ -22,6 +22,17 @@ resource "spacelift_stack_dependency_reference" "test" {
   input_name          = "TF_VAR_second_stack_output"
 }
 
+resource "spacelift_stack_dependency" "test2" {
+  stack_id            = spacelift_stack.first_stack.id
+  depends_on_stack_id = spacelift_stack.second_stack.id
+}
+
+resource "spacelift_stack_dependency_reference" "test2" {
+  stack_dependency_id = spacelift_stack_dependency.test.id
+  output_name         = "first_stack_output"
+  input_name          = "TF_VAR_first_stack_output"
+}
+
 terraform {
   required_providers {
     spacelift = {
