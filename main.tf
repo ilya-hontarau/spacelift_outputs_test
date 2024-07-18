@@ -25,7 +25,7 @@ resource "spacelift_stack_dependency" "test" {
 
 resource "spacelift_stack_dependency_reference" "test" {
   stack_dependency_id = spacelift_stack_dependency.test2.id
-  output_name         = "second_stack_output"
+  output_name         = "first_stack_output"
   input_name          = "TF_VAR_second_stack_output"
 }
 
@@ -36,7 +36,7 @@ resource "spacelift_stack_dependency" "test2" {
 
 resource "spacelift_stack_dependency_reference" "test2" {
   stack_dependency_id = spacelift_stack_dependency.test.id
-  output_name         = "first_stack_output"
+  output_name         = "second_stack_output"
   input_name          = "TF_VAR_first_stack_output"
 }
 
