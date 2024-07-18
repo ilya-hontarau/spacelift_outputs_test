@@ -32,7 +32,7 @@ resource "spacelift_run" "first" {
   stack_id = spacelift_stack.first_stack.id
 
   keepers = {
-    branch = spacelift_stack.this.branch
+    branch = spacelift_stack.first_stack.branch
   }
 }
 
@@ -48,7 +48,7 @@ resource "spacelift_run" "second" {
   stack_id = spacelift_stack.second_stack.id
 
   keepers = {
-    branch = spacelift_stack.this.branch
+    branch = spacelift_stack.second_stack.branch
   }
 }
 resource "spacelift_stack" "third_stack" {
@@ -63,7 +63,7 @@ resource "spacelift_run" "third" {
   stack_id = spacelift_stack.third_stack.id
 
   keepers = {
-    branch = spacelift_stack.this.branch
+    branch = spacelift_stack.third_stack.branch
   }
 }
 
