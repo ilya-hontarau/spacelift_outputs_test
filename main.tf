@@ -20,7 +20,6 @@ resource "spacelift_stack_dependency_reference" "that" {
   input_name          = "TF_VAR_second_stack_output"
 }
 
-
 resource "spacelift_stack" "first_stack" {
   branch     = "main"
   name       = "first stack"
@@ -51,7 +50,7 @@ resource "spacelift_run" "second" {
   keepers = {
     branch = spacelift_stack.this.branch
   }
-
+}
 resource "spacelift_stack" "third_stack" {
   branch     = "main"
   name       = "third stack"
@@ -66,6 +65,7 @@ resource "spacelift_run" "third" {
   keepers = {
     branch = spacelift_stack.this.branch
   }
+}
 
 terraform {
   required_providers {
