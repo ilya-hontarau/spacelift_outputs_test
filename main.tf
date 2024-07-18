@@ -11,6 +11,13 @@ resource "spacelift_stack" "second_stack" {
   repository = "second_stack"
 }
 
+resource "spacelift_stack" "third_stack" {
+  branch     = "main"
+  name       = "third stack"
+  repository = "third_stack"
+}
+
+
 resource "spacelift_stack_dependency" "test" {
   stack_id            = spacelift_stack.second_stack.id
   depends_on_stack_id = spacelift_stack.first_stack.id
@@ -23,7 +30,7 @@ resource "spacelift_stack_dependency_reference" "test" {
 }
 
 resource "spacelift_stack_dependency" "test2" {
-  stack_id            = spacelift_stack.first_stack.id
+  stack_id            = spacelift_stack.third_stack.id
   depends_on_stack_id = spacelift_stack.second_stack.id
 }
 
