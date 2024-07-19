@@ -28,14 +28,6 @@ resource "spacelift_stack" "first_stack" {
   project_root      = "first_stack"
 }
 
-resource "spacelift_run" "first" {
-  stack_id = spacelift_stack.first_stack.id
-
-  keepers = {
-    branch = spacelift_stack.first_stack.branch
-  }
-}
-
 resource "spacelift_stack" "second_stack" {
   branch     = "main"
   name       = "second stack"
