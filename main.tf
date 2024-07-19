@@ -42,6 +42,7 @@ resource "spacelift_run" "second" {
   keepers = {
     branch = spacelift_stack.second_stack.branch
   }
+  depends_on = [spacelift_stack_dependency.this]
 }
 resource "spacelift_stack" "third_stack" {
   branch     = "main"
@@ -54,6 +55,7 @@ resource "spacelift_stack" "third_stack" {
 resource "spacelift_run" "third" {
   stack_id = spacelift_stack.third_stack.id
 
+  depends_on = [spacelift_stack_dependency.this]
   keepers = {
     branch = spacelift_stack.third_stack.branch
   }
