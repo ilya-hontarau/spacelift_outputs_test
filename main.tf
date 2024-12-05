@@ -26,6 +26,7 @@ resource "spacelift_stack" "first_stack" {
   autodeploy = true
   repository = "spacelift_outputs_test"
   project_root      = "first_stack"
+worker_pool_id  = "01JDMB3N7C7BWFS8WHA6SD37RB"
 }
 
 resource "spacelift_stack" "second_stack" {
@@ -34,6 +35,8 @@ resource "spacelift_stack" "second_stack" {
   repository = "spacelift_outputs_test"
   project_root      = "second_stack"
   autodeploy = true
+
+worker_pool_id = "01JDMB3N7C7BWFS8WHA6SD37RB"
 }
 
 resource "spacelift_run" "second" {
@@ -50,6 +53,7 @@ resource "spacelift_stack" "third_stack" {
   repository = "spacelift_outputs_test"
   project_root      = "third_stack"
   autodeploy = true
+  worker_pool_id =  "01JDMB3N7C7BWFS8WHA6SD37RB"
 }
 
 resource "spacelift_run" "third" {
